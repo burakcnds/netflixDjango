@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% load static %} {% block css %}
+    <style>
+        body{
+            background-color: black !important;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="content h-100 d-flex flex-column justify-content-center align-items-center  text-white fs-5 container text-center p-3">
+   
+   <div class="d-flex gap-3">
+    {% for i in request.user.profil_set.all  %}
+    <div class="card bg-transparent border-0">
+        <a href="{% url 'movie' i.id %}" class="text-decoration-none">
+            <img src="{{i.image.url}}" width="200" height="200" alt="">
+            <p class="text-white fs-4">{{i.title}}</p>
+        </a>
+        <form method="POST">
+            {% csrf_token %}
+            <input name="sil" type="text" value="{{i.id}}" hidden>
+            <input type="submit" value="Sil" class="btn btn-danger">
+        </form>
+    </div>
+    {% endfor %}
+   </div>
+
+   {% if request.user.profil_sayac == 5 %}
+   <a href="{% url 'profil-manage' %}" class="btn btn-outline-light disabled">Profil Yönetimi</a>
+   {% else %}
+   <a href="{% url 'profil-manage' %}" class="btn btn-outline-light">Profil Yönetimi</a>
+   {% endif %}
+</div>
+
+{% endblock content %}

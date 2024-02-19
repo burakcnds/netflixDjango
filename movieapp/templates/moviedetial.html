@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+    <style>
+        body{
+            background-color: black !important;
+        }
+    </style>
+{% endblock css %}
+
+
+{% block content %}
+{% include "partials/_navbar.html" %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-white">Beğenebileceğinz Filmler</h1>
+            <div class="cizgi"></div>
+        </div>
+        
+        
+        <div class="col-12">
+            <div class="card bg-transparent">
+                
+                <video controls src="{{film.video.url}}" alt="">
+                <p class="text-white">{{film.title}}</p>
+            </div>
+        </div>
+
+        
+
+        
+
+
+    </div>
+</div>
+
+
+
+{% endblock content %}
